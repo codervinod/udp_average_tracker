@@ -7,51 +7,56 @@
 //
 
 #include <iostream>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
 
-#define PORT 1153
-#define BUFSIZE 4
+#include "sqlite3.h"
+#include "udp_server.h"
+
+
+static int callback(void *NotUsed, int argc, char **argv, char **azColName){
+    int i;
+    for(i=0; i<argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    printf("\n");
+    return 0;
+}
+
+
+void testDB(){
+    sqlite3 *db;
+    char *zErrMsg = 0;
+    int rc;
+    
+    rc = sqlite3_open("./test.db", &db);
+    
+    if( rc ){
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }else{
+        fprintf(stderr, "Opened database successfully\n");
+    }
+    /* Create SQL statement */
+    const char *sql = "CREATE TABLE COMPANY("  \
+    "ID INT PRIMARY KEY     NOT NULL," \
+    "NAME           TEXT    NOT NULL," \
+    "AGE            INT     NOT NULL," \
+    "ADDRESS        CHAR(50)," \
+    "SALARY         REAL );";
+    
+    /* Execute SQL statement */
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }else{
+        fprintf(stdout, "Table created successfully\n");
+    }
+    sqlite3_close(db);
+}
 
 int main(int argc, const char * argv[]) {
-    struct sockaddr_in myaddr;      /* our address */
-    struct sockaddr_in remaddr;     /* remote address */
-    socklen_t addrlen = sizeof(remaddr);            /* length of addresses */
-    size_t recvlen;                    /* # bytes received */
-    int fd;                         /* our socket */
-    unsigned char buffer[BUFSIZE];     /* receive buffer */
     
-    /* create a UDP socket */
-    
-    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-        perror("cannot create socket\n");
-        return 0;
-    }
-    
-    /* bind the socket to any valid IP address and a specific port */
-    
-    memset((char *)&myaddr, 0, sizeof(myaddr));
-    myaddr.sin_family = AF_INET;
-    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    myaddr.sin_port = htons(PORT);
-    
-    if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
-        perror("bind failed");
-        return 0;
-    }
-    
-    /* now loop, receiving data and printing what we received */
-    for (;;) {
-        printf("waiting on port %d\n", PORT);
-        recvlen = recvfrom(fd, buffer, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-        printf("received %ld bytes\n", recvlen);
-        if (recvlen > 0) {
-            unsigned int *data=(unsigned int *)buffer;
-            printf("Recieved int: 0x%x\n",*data);
-        }
-    }
-    /* never exits */
+    UdpServer udp_server(1153);
+    udp_server.join();
     return 0;
 }
