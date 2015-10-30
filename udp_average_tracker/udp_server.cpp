@@ -66,7 +66,7 @@ int UdpServer::run()
         printf("received %ld bytes\n", recvlen);
         if (recvlen > 0) {
             unsigned int *data=(unsigned int *)buffer;
-            printf("Recieved int: 0x%x\n",*data);
+            printf("Recieved int: %d\n",*data);
         }
     }
 }
