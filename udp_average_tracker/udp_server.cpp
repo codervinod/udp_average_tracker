@@ -14,12 +14,14 @@
 #include <string.h>
 #include <thread>
 #include "udp_server.h"
+#include "server_manager.h"
 
 #define BUFSIZE 4
 
-UdpServer::UdpServer(int port)
+UdpServer::UdpServer(ServerManager *sm,int port)
     :_port(port),
-    _runner(&UdpServer::run,this)
+    _runner(&UdpServer::run,this),
+    Server(sm)
 {
 }
 
@@ -66,7 +68,7 @@ int UdpServer::run()
         printf("received %ld bytes\n", recvlen);
         if (recvlen > 0) {
             unsigned int *data=(unsigned int *)buffer;
-            printf("Recieved int: %d\n",*data);
+            _sm->StoreValue(*data);
         }
     }
 }

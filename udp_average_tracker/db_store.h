@@ -2,29 +2,22 @@
 //  db_store.h
 //  udp_average_tracker
 //
-//  Created by Vinod Gupta on 10/29/15.
+//  Created by Vinod Gupta on 10/30/15.
 //  Copyright (c) 2015 vinodg. All rights reserved.
 //
 
-#ifndef __udp_average_tracker__db_store__
-#define __udp_average_tracker__db_store__
+#ifndef udp_average_tracker_db_store_h
+#define udp_average_tracker_db_store_h
 
-#include <stdio.h>
-#include <string>
-#include "sqlite3.h"
-#include <time.h>
 class DbStore{
 public:
-    DbStore(std::string store);
-    virtual ~DbStore();
-    bool Connect();
-    bool InitTables();
-    bool SetVal(time_t time,unsigned int value);
-    bool SetAverage(time_t time,unsigned int value);
-private:
-    bool ExecQuery(std::string sql);
-    std::string _store;
-    sqlite3 *_db;
+    DbStore() {}
+    virtual ~DbStore() {}
+    virtual bool Connect() = 0;
+    virtual bool InitTables() = 0;
+    virtual bool SetVal(time_t time,unsigned int value) = 0;
+    virtual bool SetAverage(time_t time,unsigned int value) = 0;
+
 };
 
-#endif /* defined(__udp_average_tracker__db_store__) */
+#endif

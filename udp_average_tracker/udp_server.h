@@ -11,10 +11,14 @@
 
 #include <stdio.h>
 #include <thread>
+#include "server.h"
 
-class UdpServer{
+class ServerManager;
+
+class UdpServer:public Server
+{
 public:
-    UdpServer(int port);
+    UdpServer(ServerManager *sm,int port);
     virtual ~UdpServer();
     int run();
     void join();

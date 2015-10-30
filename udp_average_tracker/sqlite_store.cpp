@@ -6,22 +6,22 @@
 //  Copyright (c) 2015 vinodg. All rights reserved.
 //
 
-#include "db_store.h"
+#include "sqlite_store.h"
 #include <sstream>
 
-DbStore::DbStore(std::string store)
+SqLiteStore::SqLiteStore(std::string store)
     :_store(store),_db(NULL)
 {
     
 }
 
-DbStore::~DbStore()
+SqLiteStore::~SqLiteStore()
 {
     if(_db)
         sqlite3_close(_db);
 }
 
-bool DbStore::Connect()
+bool SqLiteStore::Connect()
 {
     int rc = sqlite3_open(_store.c_str(), &_db);
     
@@ -44,7 +44,7 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName){
     return 0;
 }
 
-bool DbStore::ExecQuery(std::string sql)
+bool SqLiteStore::ExecQuery(std::string sql)
 {
     char *zErrMsg=0;
     int rc=-1;
@@ -61,7 +61,7 @@ bool DbStore::ExecQuery(std::string sql)
 
 }
 
-bool DbStore::InitTables()
+bool SqLiteStore::InitTables()
 {
     const char *sql1 = "CREATE TABLE IF NOT EXISTS TIMELOG("  \
     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
@@ -80,7 +80,7 @@ bool DbStore::InitTables()
     return ExecQuery(sql2) && ret;//create even if other returned false
 }
 
-bool DbStore::SetVal(time_t time,unsigned int value)
+bool SqLiteStore::SetVal(time_t time,unsigned int value)
 {
     std::stringstream ss;
     ss<<"INSERT INTO TIMELOG (value,time) VALUES(";
@@ -89,7 +89,7 @@ bool DbStore::SetVal(time_t time,unsigned int value)
     return ExecQuery(ss.str());
 }
 
-bool DbStore::SetAverage(time_t time,unsigned int value)
+bool SqLiteStore::SetAverage(time_t time,unsigned int value)
 {
     std::stringstream ss;
     ss<<"INSERT INTO AVERAGE_TIMELOG (value,time) VALUES(";

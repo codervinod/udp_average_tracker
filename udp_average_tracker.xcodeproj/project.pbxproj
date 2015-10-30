@@ -10,7 +10,8 @@
 		1B816F841BE2B4A4004981A2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B816F831BE2B4A4004981A2 /* main.cpp */; };
 		1B816FA11BE2BF77004981A2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 1B816F9F1BE2BF77004981A2 /* sqlite3.c */; };
 		1B816FA41BE2C564004981A2 /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B816FA21BE2C564004981A2 /* udp_server.cpp */; };
-		1B816FA71BE2C8B8004981A2 /* db_store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B816FA51BE2C8B8004981A2 /* db_store.cpp */; };
+		1B819DA21BE40E16004981A2 /* sqlite_store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B819DA11BE40E16004981A2 /* sqlite_store.cpp */; };
+		1B819DA91BE4143B004981A2 /* server_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B819DA81BE4143B004981A2 /* server_manager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,8 +33,16 @@
 		1B816FA01BE2BF77004981A2 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		1B816FA21BE2C564004981A2 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = udp_server.cpp; sourceTree = "<group>"; };
 		1B816FA31BE2C564004981A2 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udp_server.h; sourceTree = "<group>"; };
-		1B816FA51BE2C8B8004981A2 /* db_store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = db_store.cpp; sourceTree = "<group>"; };
-		1B816FA61BE2C8B8004981A2 /* db_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db_store.h; sourceTree = "<group>"; };
+		1B819D9D1BE3D3A5004981A2 /* bounded_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bounded_buffer.h; sourceTree = "<group>"; };
+		1B819D9F1BE3D8DA004981A2 /* ring_buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ring_buffer.h; sourceTree = "<group>"; };
+		1B819DA01BE3E379004981A2 /* producer_consumer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = producer_consumer.h; sourceTree = "<group>"; };
+		1B819DA11BE40E16004981A2 /* sqlite_store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sqlite_store.cpp; sourceTree = "<group>"; };
+		1B819DA31BE40E1C004981A2 /* sqlite_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite_store.h; sourceTree = "<group>"; };
+		1B819DA41BE40E2B004981A2 /* db_store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = db_store.h; sourceTree = "<group>"; };
+		1B819DA51BE41154004981A2 /* server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
+		1B819DA61BE41255004981A2 /* server_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server_manager.h; sourceTree = "<group>"; };
+		1B819DA81BE4143B004981A2 /* server_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_manager.cpp; sourceTree = "<group>"; };
+		1B819DAA1BE41488004981A2 /* time_value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time_value.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +75,21 @@
 		1B816F821BE2B4A4004981A2 /* udp_average_tracker */ = {
 			isa = PBXGroup;
 			children = (
+				1B819DAA1BE41488004981A2 /* time_value.h */,
+				1B819DA31BE40E1C004981A2 /* sqlite_store.h */,
+				1B819DA11BE40E16004981A2 /* sqlite_store.cpp */,
 				1B816F9F1BE2BF77004981A2 /* sqlite3.c */,
 				1B816FA01BE2BF77004981A2 /* sqlite3.h */,
 				1B816F831BE2B4A4004981A2 /* main.cpp */,
 				1B816FA21BE2C564004981A2 /* udp_server.cpp */,
 				1B816FA31BE2C564004981A2 /* udp_server.h */,
-				1B816FA51BE2C8B8004981A2 /* db_store.cpp */,
-				1B816FA61BE2C8B8004981A2 /* db_store.h */,
+				1B819D9D1BE3D3A5004981A2 /* bounded_buffer.h */,
+				1B819D9F1BE3D8DA004981A2 /* ring_buffer.h */,
+				1B819DA01BE3E379004981A2 /* producer_consumer.h */,
+				1B819DA41BE40E2B004981A2 /* db_store.h */,
+				1B819DA51BE41154004981A2 /* server.h */,
+				1B819DA61BE41255004981A2 /* server_manager.h */,
+				1B819DA81BE4143B004981A2 /* server_manager.cpp */,
 			);
 			path = udp_average_tracker;
 			sourceTree = "<group>";
@@ -133,10 +150,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B819DA91BE4143B004981A2 /* server_manager.cpp in Sources */,
 				1B816F841BE2B4A4004981A2 /* main.cpp in Sources */,
 				1B816FA41BE2C564004981A2 /* udp_server.cpp in Sources */,
 				1B816FA11BE2BF77004981A2 /* sqlite3.c in Sources */,
-				1B816FA71BE2C8B8004981A2 /* db_store.cpp in Sources */,
+				1B819DA21BE40E16004981A2 /* sqlite_store.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
