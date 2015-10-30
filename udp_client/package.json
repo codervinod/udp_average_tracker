@@ -1,0 +1,14 @@
+{
+  "name": "udp_client",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinod Gupta <vinod_gupta@live.com>",
+  "license": "ISC",
+  "dependencies": {
+    "random-js": "^1.0.8"
+  }
+}

@@ -32,12 +32,14 @@ public:
 private:
     void consumer_runner();
     static ServerManager *_inst;
-    ServerManager() {}
+    ServerManager();
     DbStore *_db_store;
     Server *_server;
     ProducerConsumer<TimeValue> *_pc;
     std::thread _consumer_thread;
     bool _run_consumer;
+    time_t _last_update_timestamp;
+    size_t _current_sum,_current_count;
 };
 
 #endif
