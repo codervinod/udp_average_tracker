@@ -19,6 +19,6 @@ int main(int argc, const char * argv[]) {
     std::cout<<"db file="<<argv[2]<<std::endl;
     
     ServerManager::inst()->start(atoi(argv[1]),argv[2]);
-    
+    ServerManager::inst()->join();
     return 0;
 }

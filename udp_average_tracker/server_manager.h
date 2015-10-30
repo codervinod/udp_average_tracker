@@ -28,7 +28,7 @@ public:
     void start(int port,std::string db_file);
     void end();
     void StoreValue(int value);
-    
+    void join();
 private:
     void consumer_runner();
     static ServerManager *_inst;

@@ -47,13 +47,17 @@ void ServerManager::start(int port,std::string db_file)
     _consumer_thread = std::thread(&ServerManager::consumer_runner, this);
     
     _server = new UdpServer(this,port);
-    
+}
+
+void ServerManager::join()
+{
     _server->join();
     _consumer_thread.join();
 }
 
 void ServerManager::end()
 {
+    join();
     _run_consumer = false;
 }
 
