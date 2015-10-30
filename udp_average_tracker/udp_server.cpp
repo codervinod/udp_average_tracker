@@ -65,7 +65,6 @@ int UdpServer::run()
     /* now loop, receiving data and printing what we received */
     for (;;) {
         recvlen = recvfrom(fd, buffer, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-        printf("received %ld bytes\n", recvlen);
         if (recvlen > 0) {
             unsigned int *data=(unsigned int *)buffer;
             _sm->StoreValue(*data);
