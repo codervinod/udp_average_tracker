@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= message
+    
+    h3
+    table
+      thead
+        tr
+          th ID
+          th Value
+          th Time
+      - for (var r in rows)
+          tr
+            td= rows[r].id
+            td= rows[r].value
+            td= rows[r].time
+
+  br
+  #[a(href="/") Home]
