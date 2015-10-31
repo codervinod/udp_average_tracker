@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
-
+var _=require('lodash');
+var moment = require('moment');
 /* GET users listing. */
 router.get('/', function(req, res) {
   var db_name = "/Users/vinodg/Library/Developer/Xcode/DerivedData/udp_average_tracker-bxqiyzyqmssotyfdgquzmfqmpxjk/Build/Products/Debug/avg_tracker.db";
@@ -14,8 +15,20 @@ router.get('/', function(req, res) {
 	});
 
 	db.all(" select * from " + table, function(err, rows) {	    
+	    rows.slice(Math.max(rows.length - 50, 1));
+	    rows = _.map(rows,function(row){
+
+	    	return _.transform(row,function(result, val, key){
+		    	if(key == 'time'){
+		    		var t=moment.unix(val);
+		    		result[key] = t.format();
+		    	}else{
+		    		result[key] = val;
+		    	}
+		    });
+		  });
+
 	    var message = "Viewing Average Timelog";
-	    
 	    res.render('avglog', {message: message, rows: rows});
 	    db.close();
 	});
