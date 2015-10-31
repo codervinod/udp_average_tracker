@@ -4,7 +4,7 @@ var Random = require('random-js');
 var engine = Random.engines.mt19937().autoSeed();
 // create a distribution that will consistently produce integers within inclusive range [0, 99].
 var distributionTime = Random.integer(0, 60);
-var distribution = Random.integer(0,0xFFFFFFFF);
+var distribution = Random.integer(0,50);
 
 function sendPacket(){
 	var value=distribution(engine);

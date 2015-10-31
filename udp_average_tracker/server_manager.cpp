@@ -103,7 +103,7 @@ void ServerManager::consumer_runner()
                                   (unsigned int)_current_sum/_current_count);
             _current_sum = 0;
             _current_count = 0;
-            _last_update_timestamp = _last_update_timestamp+AVG_INTERVAL;
+            _last_update_timestamp = std::max(tv._timestamp,_last_update_timestamp+AVG_INTERVAL);
         }
         
         //update average computation

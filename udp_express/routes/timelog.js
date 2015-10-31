@@ -14,9 +14,9 @@ router.get('/', function(req, res) {
 		return;
 	});
 
-	db.all(" select * from " + table, function(err, rows) {
-			rows.slice(Math.max(rows.length - 50, 1));
-
+	db.all("select * from " + table +" LIMIT 50 OFFSET (SELECT COUNT(*) FROM " + table +")-50;", 
+		function(err, rows) {
+		rows.reverse();
 	    rows = _.map(rows,function(row){
 
 	    	return _.transform(row,function(result, val, key){
